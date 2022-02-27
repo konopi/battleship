@@ -11,7 +11,7 @@ This project is an implementation of a simple battleship game in Java.
 ## Technologies
 Project was created with:
 * Java 17.0.1
-* JUnit 5
+* JUnit 5.8.1
 	
 ## Setup
 TODO
