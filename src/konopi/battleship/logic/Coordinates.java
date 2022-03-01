@@ -64,8 +64,9 @@ public class Coordinates {
      * @param letterOffset Vertical difference, increases down.
      * @param numberOffset Horizontal difference, increases right.
      * @return New {@link Coordinates} object offset by the specified amount.
+     * @throws IllegalArgumentException The offset coordinates are smaller than 'A1' on one of the axes.
      */
-    public Coordinates getOffset(int letterOffset, int numberOffset) {
+    public Coordinates getOffset(int letterOffset, int numberOffset) throws IllegalArgumentException {
         int offsetX = x + numberOffset;
         int offsetY = y + letterOffset;
 
