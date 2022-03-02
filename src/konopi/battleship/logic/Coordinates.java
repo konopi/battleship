@@ -51,7 +51,7 @@ public class Coordinates {
      * @param y {@link #y}
      */
     private Coordinates(int x, int y) {
-        if (x < 0 || y < 0) {
+        if (x < 0 || y < 0 || y > 25) {
             throw new IllegalArgumentException("Coordinates out of bounds");
         }
         this.x = x;
