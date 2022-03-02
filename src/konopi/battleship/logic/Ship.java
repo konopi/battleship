@@ -17,7 +17,7 @@ public class Ship {
     /**
      * Set containing all ship squares that are afloat.
      */
-    public final HashSet<Coordinates> activeShipSquares = new HashSet<>();
+    private final HashSet<Coordinates> activeShipSquares = new HashSet<>();
 
     /**
      * Main constructor. The ship is generated starting from the {@code sternSquare}, positioned by
@@ -58,5 +58,9 @@ public class Ship {
      */
     public boolean isSunk() {
         return activeShipSquares.isEmpty();
+    }
+
+    public HashSet<Coordinates> getActiveShipSquares() {
+        return activeShipSquares;
     }
 }
