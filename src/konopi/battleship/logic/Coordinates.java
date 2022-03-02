@@ -45,6 +45,22 @@ public class Coordinates {
     }
 
     /**
+     * Gets the first (vertical) coordinate.
+     * @return e.g. 'A' for 'A1' coordinates.
+     */
+    public char getLetterCoordinate() {
+        return (char)(y + 'A');
+    }
+
+    /**
+     * Gets the second (horizontal) coordinate.
+     * @return e.g. 1 for 'A1' coordinates.
+     */
+    public int getNumberCoordinate() {
+        return x + 1;
+    }
+
+    /**
      * Private constructor setting the internal representation directly.
      * Used in {@link #getOffset(int, int) getOffset}.
      * @param x {@link #x}
@@ -77,8 +93,8 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        int number = x + 1;
-        char letter = (char)(y + 'A');
+        int number = getNumberCoordinate();
+        char letter = getLetterCoordinate();
         return letter + String.valueOf(number);
     }
 
