@@ -3,6 +3,10 @@ package konopi.battleship.logic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShipTest {
@@ -11,6 +15,15 @@ class ShipTest {
     @BeforeEach
     void setUp() {
         s = new Ship(new Coordinates("D8"), 4, Ship.Orientation.HORIZONTAL);
+    }
+
+    @Test
+    void testGetActiveSquares() {
+        HashSet<Coordinates> expected = Stream.of("D8", "D9", "D10", "D11")
+                .map(Coordinates::new)
+                .collect(Collectors.toCollection(HashSet::new));
+
+        assertEquals(expected, s.getActiveSquares());
     }
 
     @Test
