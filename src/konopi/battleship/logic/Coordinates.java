@@ -67,6 +67,8 @@ public class Coordinates {
      * @throws IllegalArgumentException The offset coordinates are smaller than 'A1' on one of the axes.
      */
     public Coordinates getOffset(int letterOffset, int numberOffset) throws IllegalArgumentException {
+        if (letterOffset == 0 && numberOffset == 0) return this;
+
         int offsetX = x + numberOffset;
         int offsetY = y + letterOffset;
 
