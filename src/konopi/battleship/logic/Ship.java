@@ -17,7 +17,7 @@ public class Ship {
     /**
      * Set containing all ship squares that are afloat.
      */
-    private final HashSet<Coordinates> activeShipSquares = new HashSet<>();
+    private final HashSet<Coordinates> activeSquares = new HashSet<>();
 
     /**
      * Main constructor. The ship is generated starting from the {@code sternSquare}, positioned by
@@ -40,7 +40,7 @@ public class Ship {
 
         IntStream.range(0, size)
                 .mapToObj(getOrientedOffset)
-                .forEach(activeShipSquares::add);
+                .forEach(activeSquares::add);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Ship {
      * @return {@code true} if the hit was successful.
      */
     public boolean hit(Coordinates coordinates) {
-        return activeShipSquares.remove(coordinates);
+        return activeSquares.remove(coordinates);
     }
 
     /**
@@ -57,10 +57,10 @@ public class Ship {
      * @return {@code true} if the ship has no squares afloat.
      */
     public boolean isSunk() {
-        return activeShipSquares.isEmpty();
+        return activeSquares.isEmpty();
     }
 
-    public HashSet<Coordinates> getActiveShipSquares() {
-        return activeShipSquares;
+    public HashSet<Coordinates> getActiveSquares() {
+        return activeSquares;
     }
 }
