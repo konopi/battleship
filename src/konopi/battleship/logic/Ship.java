@@ -9,6 +9,11 @@ import java.util.stream.IntStream;
  * It keeps track of the afloat squares occupied by it and its name.
  */
 public class Ship {
+    public enum HitDesignation {
+        HIT,
+        MISS,
+        SINK
+    }
     public enum Orientation {
         HORIZONTAL,
         VERTICAL
@@ -53,10 +58,13 @@ public class Ship {
     /**
      * Registers the hit on the target square. Returns the outcome.
      * @param coordinates Target square.
-     * @return {@code true} if the hit was successful.
+     * @return A {@link HitDesignation} value according to the outcome.
      */
-    public boolean hit(Coordinates coordinates) {
-        return activeSquares.remove(coordinates);
+    public HitDesignation hit(Coordinates coordinates) {
+        boolean hit = activeSquares.remove(coordinates);
+        if (hit) {
+            return isSunk() ? HitDesignation.SINK : HitDesignation.HIT;
+        } else return HitDesignation.MISS;
     }
 
     /**

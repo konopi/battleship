@@ -35,10 +35,17 @@ class ShipTest {
 
     @Test
     void testHit() {
-        assertTrue(s.hit(new Coordinates("D10"))); // first hit should return true
-        assertFalse(s.hit(new Coordinates("D10"))); // second hit should return false
+        /* a hit */
+        assertEquals(Ship.HitDesignation.HIT, s.hit(new Coordinates("D10")));
+        /* repeated shot should not be a hit */
+        assertEquals(Ship.HitDesignation.MISS, s.hit(new Coordinates("D10")));
 
-        assertFalse(s.hit(new Coordinates("E10"))); // not a ship coordinate
+        s.hit(new Coordinates("D8"));
+        s.hit(new Coordinates("D9"));
+        /* if the hit square is the last one active it should be a sink */
+        assertEquals(Ship.HitDesignation.SINK, s.hit(new Coordinates("D11")));
+
+        assertEquals(Ship.HitDesignation.MISS, s.hit(new Coordinates("E10"))); // not a ship coordinate
     }
 
     @Test
