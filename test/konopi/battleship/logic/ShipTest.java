@@ -14,7 +14,7 @@ class ShipTest {
 
     @BeforeEach
     void setUp() {
-        s = new Ship(new Coordinates("D8"), 4, Ship.Orientation.HORIZONTAL);
+        s = new Ship(new Coordinates("D8"), 4, Ship.Orientation.HORIZONTAL, "Battleship");
     }
 
     @Test
@@ -24,6 +24,13 @@ class ShipTest {
                 .collect(Collectors.toCollection(HashSet::new));
 
         assertEquals(expected, s.getActiveSquares());
+    }
+
+    @Test
+    void testGetName() {
+        String expected = "Battleship";
+
+        assertEquals(expected, s.getName());
     }
 
     @Test
@@ -54,7 +61,8 @@ class ShipTest {
         String expected = "Size should be >= 1: 0";
 
         IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> new Ship(new Coordinates("A1"), 0, Ship.Orientation.VERTICAL)
+                IllegalArgumentException.class,
+                () -> new Ship(new Coordinates("A1"), 0, Ship.Orientation.VERTICAL, "Raft")
         );
         assertEquals(expected, exception.getMessage());
     }
@@ -64,7 +72,8 @@ class ShipTest {
         String expected = "Coordinates out of bounds";
 
         IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> new Ship(new Coordinates("Z1"), 3, Ship.Orientation.VERTICAL)
+                IllegalArgumentException.class,
+                () -> new Ship(new Coordinates("Z1"), 3, Ship.Orientation.VERTICAL, "Cruiser")
         );
         assertEquals(expected, exception.getMessage());
     }

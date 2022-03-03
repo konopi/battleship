@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 /**
  * The Ship class provides means to create and manage a single ship entity.
- * It keeps track of the afloat squares occupied by it.
+ * It keeps track of the afloat squares occupied by it and its name.
  */
 public class Ship {
     public enum Orientation {
@@ -18,6 +18,10 @@ public class Ship {
      * Set containing all ship squares that are afloat.
      */
     private final HashSet<Coordinates> activeSquares = new HashSet<>();
+    /**
+     * Ship designation, e.g. "Carrier", "Battleship", "Destroyer", etc.
+     */
+    private final String name;
 
     /**
      * Main constructor. The ship is generated starting from the {@code sternSquare}, positioned by
@@ -25,9 +29,10 @@ public class Ship {
      * @param sternSquare Starting coordinates for ship squares generation. The stern of the ship.
      * @param size Ship length. Amount of ship squares.
      * @param orientation The designation for the direction of the ship.
-     * @throws IllegalArgumentException A part of the specified ship found itself out of bounds.
+     * @param name Ship identifier, e.g. "Cruiser" or "Destroyer".
+     * @throws IllegalArgumentException Specified size is less than 1.
      */
-    public Ship(Coordinates sternSquare, int size, Orientation orientation) throws IllegalArgumentException {
+    public Ship(Coordinates sternSquare, int size, Orientation orientation, String name) {
         if (size < 1) {
             throw new IllegalArgumentException("Size should be >= 1: " + size);
         }
@@ -41,6 +46,8 @@ public class Ship {
         IntStream.range(0, size)
                 .mapToObj(getOrientedOffset)
                 .forEach(activeSquares::add);
+
+        this.name = name;
     }
 
     /**
@@ -60,7 +67,19 @@ public class Ship {
         return activeSquares.isEmpty();
     }
 
+    /**
+     * Gets a set of ship squares which are afloat.
+     * @return {@code HashSet} containing active ship coordinates.
+     */
     public HashSet<Coordinates> getActiveSquares() {
         return activeSquares;
+    }
+
+    /**
+     * Gets the ship identifier.
+     * @return Ship identifier, e.g. "Cruiser" or "Destroyer".
+     */
+    public String getName() {
+        return name;
     }
 }
