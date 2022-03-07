@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+/**
+ * The Game class is used to handle all the game logic. Each {@link #tick() tick} call is a next game step.
+ */
 public class Game {
     /**
      * Game state.

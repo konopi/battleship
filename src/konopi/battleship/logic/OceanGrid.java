@@ -2,6 +2,10 @@ package konopi.battleship.logic;
 
 import java.util.HashMap;
 
+/**
+ * The OceanGrid class is created specifying its length (y) and width (x). It provides the means
+ * to add a ship to the grid, fire a shot on the specified coordinates and get a map of hits.
+ */
 public class OceanGrid {
     /**
      * Record returned as result of {@link #shoot(Coordinates) shoot}.
