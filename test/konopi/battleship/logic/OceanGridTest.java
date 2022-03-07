@@ -58,6 +58,21 @@ class OceanGridTest {
     }
 
     @Test
+    void testGetActiveShipAmount() {
+        assertEquals(0, og.getActiveShipAmount());
+
+        Ship s = new Ship(new Coordinates("A3"), 2, Ship.Orientation.VERTICAL, "Cruiser");
+        og.addShip(s);
+        assertEquals(1, og.getActiveShipAmount());
+
+        og.shoot(new Coordinates("A3")); // hit
+        assertEquals(1, og.getActiveShipAmount());
+
+        og.shoot(new Coordinates("B3")); // sink
+        assertEquals(0, og.getActiveShipAmount());
+    }
+    
+    @Test
     void testGetHitMap() {
         Ship s = new Ship(new Coordinates("A3"), 2, Ship.Orientation.VERTICAL, "Cruiser");
         og.addShip(s);

@@ -6,7 +6,13 @@ public class OceanGrid {
     /**
      * Record returned as result of {@link #shoot(Coordinates) shoot}.
      */
-    record ShotResult(String shipName, Ship.HitDesignation hitDesignation) {}
+    public record ShotResult(String shipName, Ship.HitDesignation hitDesignation) {}
+
+    /**
+     * Amount of active ships on the grid. Increases in {@link #addShip(Ship) addShip}.
+     * Decreases in {@link #shoot(Coordinates) shoot}.
+     */
+    private int activeShipAmount = 0;
 
     /**
      * Coordinates are mapped to a ship which occupies them. Populated by calling {@link #addShip(Ship) addShip}.
@@ -67,6 +73,7 @@ public class OceanGrid {
             if (isOutOfBounds(coordinates) || isOccupied(coordinates)) return false;
         }
         ship.getActiveSquares().forEach(coordinates -> shipMap.put(coordinates, ship));
+        ++activeShipAmount;
         return true;
     }
 
@@ -91,7 +98,14 @@ public class OceanGrid {
         /* It's a hit. */
         Ship.HitDesignation hit = targetShip.hit(coordinates);
         hitMap.put(coordinates, hit);
+        if (hit == Ship.HitDesignation.SINK) {
+            --activeShipAmount;
+        }
         return new ShotResult(targetShip.getName(), hit);
+    }
+
+    public int getActiveShipAmount() {
+        return activeShipAmount;
     }
 
     /**
