@@ -14,4 +14,11 @@ Project was created with:
 * JUnit 5.8.1
 	
 ## Setup
-TODO
+There are multiple ways of setting up the project to compile. Two most common are:
+
+### Using an IDE (e.g. _IntelliJ IDEA_)
+Open the root folder in a chosen IDE.
+Build the project and run the Main class.
+
+### Using the command prompt
+Compile the classes one by one using the javac command (not recommended).
