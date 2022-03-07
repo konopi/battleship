@@ -71,17 +71,17 @@ class OceanGridTest {
         og.shoot(new Coordinates("B3")); // sink
         assertEquals(0, og.getActiveShipAmount());
     }
-    
+
     @Test
     void testGetHitMap() {
         Ship s = new Ship(new Coordinates("A3"), 2, Ship.Orientation.VERTICAL, "Cruiser");
         og.addShip(s);
 
-        OceanGrid.ShotResult z15 = og.shoot(new Coordinates("Z15")); // out of bounds
+        og.shoot(new Coordinates("Z15")); // out of bounds
 
-        OceanGrid.ShotResult a4 = og.shoot(new Coordinates("A4")); // miss
-        OceanGrid.ShotResult b3 = og.shoot(new Coordinates("B3")); // hit
-        OceanGrid.ShotResult a3 = og.shoot(new Coordinates("A3")); // sink
+        og.shoot(new Coordinates("A4")); // miss
+        og.shoot(new Coordinates("B3")); // hit
+        og.shoot(new Coordinates("A3")); // sink
 
         assertNull(og.getHitMap().get(new Coordinates("Z15")));
 
